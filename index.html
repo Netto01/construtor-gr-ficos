@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizador de Gráficos de Testes</title>
+    <title>Gerador de gráficos de testes Neuropsicológicos</title>
     
     <link rel="stylesheet" href="style.css">
     
+    <!-- Incluindo a biblioteca Chart.js via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Adicionando o plugin chartjs-plugin-datalabels -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     
+    <!-- Adicionando o plugin de anotação -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.0.0"></script>
 </head>
 <body>
@@ -24,22 +27,10 @@
         <button id="ravlt-btn">Gráfico do RAVLT</button>
     </div>
 
-    <div class="container container-grafico">
-        <div id="loading-spinner" class="loading-spinner hidden"></div>
-        <canvas id="meuGrafico"></canvas>
-    </div>
-
-    <div class="container export-container">
-        <button id="export-btn">Exportar Gráfico</button>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 - Meu Projeto de Gráficos</p>
-    </footer>
-
-    <div id="edit-modal" class="modal">
-        <div class="modal-content">
-            <h2 id="modal-title">Editar Elemento</h2>
+    <div class="container main-content-layout">
+        <!-- Painel de Edição agora do lado esquerdo -->
+        <div id="edit-panel" class="editor-panel">
+            <h2 id="panel-title">Editar Dados</h2>
             <div id="label-group" class="input-grupo">
                 <label for="edit-label">Título:</label>
                 <input type="text" id="edit-label">
@@ -53,7 +44,7 @@
                 <input type="color" id="edit-color">
             </div>
             
-            <div id="options-group" class="options-group hidden">
+            <div id="options-group" class="options-group">
                 <h3>Opções do Gráfico</h3>
                 <div class="input-grupo">
                     <label for="chart-type">Tipo de Gráfico:</label>
@@ -79,13 +70,24 @@
                 </div>
             </div>
 
-            <div class="modal-buttons">
-                <button id="save-btn">Salvar</button>
-                <button id="cancel-btn">Cancelar</button>
+            <div class="panel-buttons">
+                <button id="save-btn">Salvar Alterações</button>
+            </div>
+        </div>
+
+        <div class="chart-panel">
+            <div id="loading-spinner" class="loading-spinner hidden"></div>
+            <canvas id="meuGrafico"></canvas>
+            <div class="chart-actions">
+                <button id="export-btn" class="hidden">Exportar Gráfico</button>
             </div>
         </div>
     </div>
 
+    <footer>
+        <p>&copy; 2025 - Meu Projeto de Gráficos</p>
+    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>
