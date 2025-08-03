@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let meuGrafico;
     let estadoAtualDoGrafico = {};
     let elementoEmEdicaoIndex = null;
-    let contextoEdicao = 'titulo'; // Pode ser 'titulo' ou 'barra'
+    let contextoEdicao = 'titulo';
 
     // --- 2. Dados Predefinidos dos Testes ---
     const dadosPredefinidos = {
@@ -36,14 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
             titulo: 'Resultados do WISC-IV',
             labels: ['Compreensão Verbal', 'Organização Perceptual', 'Memória Operacional', 'Velocidade de Processamento', 'QI Total'],
             valores: [110, 105, 112, 108, 115],
-            cores: ['#42a5f5', '#42a5f5', '#42a5f5', '#42a5f5', '#42a5f5'],
+            cores: ['#1abc9c', '#1abc9c', '#1abc9c', '#1abc9c', '#1abc9c'],
             tipo: 'bar'
         },
         ravlt: {
             titulo: 'Resultados do RAVLT',
             labels: ['Tentativa I', 'Tentativa II', 'Tentativa III', 'Tentativa IV', 'Tentativa V', 'Recuperação Tardia'],
             valores: [5, 8, 10, 12, 14, 13],
-            cores: ['#66bb6a', '#66bb6a', '#66bb6a', '#66bb6a', '#66bb6a', '#66bb6a'],
+            cores: ['#1abc9c', '#1abc9c', '#1abc9c', '#1abc9c', '#1abc9c', '#1abc9c'],
             tipo: 'line'
         }
     };
@@ -62,11 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     type: 'box',
                     yMin: 90,
                     yMax: 109,
-                    backgroundColor: 'rgba(0, 123, 255, 0.08)',
-                    borderColor: 'rgba(0, 123, 255, 0.2)',
+                    backgroundColor: 'rgba(26, 188, 156, 0.1)',
+                    borderColor: 'rgba(26, 188, 156, 0.3)',
                     borderWidth: 1,
                     label: {
-                        display: false // Oculta o label aqui, pois ele estará na legenda
+                        display: false
                     },
                     borderDash: [6, 6],
                     borderDashOffset: 0
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     },
                     datalabels: {
-                        color: '#666',
+                        color: '#6c757d',
                         anchor: 'end',
                         align: 'top',
                         font: {
@@ -125,14 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                 size: 14
                             },
                             padding: 20,
-                            // Adicionando a anotação na legenda
                             generateLabels: (chart) => {
                                 const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
-                                if (dados.tipo === 'bar') { // Apenas para o gráfico de barras (WISC)
+                                if (dados.tipo === 'bar') {
                                     labels.push({
                                         text: 'Média: 90 - 109',
-                                        fillStyle: 'rgba(0, 123, 255, 0.08)',
-                                        strokeStyle: 'rgba(0, 123, 255, 0.2)',
+                                        fillStyle: 'rgba(26, 188, 156, 0.1)',
+                                        strokeStyle: 'rgba(26, 188, 156, 0.3)',
                                         lineWidth: 1,
                                         hidden: false,
                                         index: labels.length
@@ -157,19 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             estadoAtualDoGrafico.valores[index],
                             estadoAtualDoGrafico.cores[index]
                         );
-                    } else {
-                        const titulo = meuGrafico.options.plugins.title;
-                        const tituloArea = {
-                            top: meuGrafico.chartArea.top,
-                            bottom: meuGrafico.options.plugins.title.top + meuGrafico.options.plugins.title.font.size + 10,
-                            left: 0,
-                            right: meuGrafico.width
-                        };
-
-                        if (e.x >= tituloArea.left && e.x <= tituloArea.right && e.y >= tituloArea.top && e.y <= tituloArea.bottom) {
-                            contextoEdicao = 'titulo';
-                            abrirModal(estadoAtualDoGrafico.titulo);
-                        }
                     }
                 },
                 
@@ -191,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         e.native.target.style.cursor = 'pointer';
                     }
                 },
-                
+
                 scales: {
                     y: {
                         beginAtZero: true,
@@ -244,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
         contextoEdicao = 'titulo';
     }
 
-    // --- 4. Eventos de Clique ---
     wiscBtn.addEventListener('click', () => {
         estadoAtualDoGrafico = JSON.parse(JSON.stringify(dadosPredefinidos.wisc));
         criarGrafico(estadoAtualDoGrafico);
@@ -255,7 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
         criarGrafico(estadoAtualDoGrafico);
     });
 
-    // Eventos do Modal
     saveBtn.addEventListener('click', () => {
         if (contextoEdicao === 'barra' && elementoEmEdicaoIndex !== null) {
             const novoLabel = editLabelInput.value;
@@ -285,6 +269,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cancelBtn.addEventListener('click', fecharModal);
 
-    // --- 5. Inicialização da Página ---
     wiscBtn.click();
 });

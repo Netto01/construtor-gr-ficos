@@ -1,12 +1,22 @@
 /* Importa uma fonte do Google Fonts para um visual mais moderno */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+/* --- Nova Paleta de Cores ---
+   Fundo: #ecf0f1
+   Conteúdo: #ffffff
+   Texto Principal: #2c3e50
+   Texto Secundário: #7f8c8d
+   Destaque: #1abc9c
+   Bordas/Linhas: #bdc3c7
+   Sombra: rgba(0, 0, 0, 0.05)
+*/
+
 /* --- Estilos Globais e do Corpo da Página --- */
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-    color: #495057;
+    background-color: #ecf0f1;
+    color: #2c3e50;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -32,19 +42,19 @@ body {
 
 h1 {
     font-size: 2em;
-    color: #212529;
+    color: #2c3e50;
     margin-bottom: 0.5em;
 }
 
 p {
     font-size: 1em;
-    color: #6c757d;
+    color: #7f8c8d;
 }
 
 #edit-title-btn {
     background-color: transparent;
-    color: #6c757d;
-    border: 1px solid #ced4da;
+    color: #7f8c8d;
+    border: 1px solid #bdc3c7;
     padding: 8px 16px;
     font-weight: 500;
     border-radius: 4px;
@@ -76,13 +86,13 @@ p {
     font-weight: 500;
     border-radius: 25px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #1abc9c; /* Nova cor de destaque */
     color: #fff;
     transition: background-color 0.2s ease-in-out;
 }
 
 .opcoes-predefinidas button:hover {
-    background-color: #0056b3;
+    background-color: #16a085;
 }
 
 /* --- Container do Gráfico --- */
@@ -104,7 +114,7 @@ p {
     width: 50px;
     height: 50px;
     border: 5px solid #f3f3f3;
-    border-top: 5px solid #007bff;
+    border-top: 5px solid #1abc9c; /* Cor do spinner */
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -154,7 +164,7 @@ p {
     font-size: 1.5em;
     margin: 0 0 10px 0;
     text-align: left;
-    color: #212529;
+    color: #2c3e50;
 }
 
 .input-grupo {
@@ -170,7 +180,7 @@ p {
 .input-grupo label {
     font-size: 0.9em;
     font-weight: 500;
-    color: #6c757d;
+    color: #7f8c8d;
     margin-bottom: 5px;
 }
 
@@ -178,7 +188,7 @@ p {
 .input-grupo input[type="number"],
 .input-grupo input[type="color"] {
     border: none;
-    border-bottom: 2px solid #ced4da;
+    border-bottom: 2px solid #bdc3c7;
     padding: 8px 0;
     font-size: 1em;
     background-color: transparent;
@@ -189,7 +199,7 @@ p {
 .input-grupo input[type="number"]:focus,
 .input-grupo input[type="color"]:focus {
     outline: none;
-    border-bottom-color: #007bff;
+    border-bottom-color: #1abc9c;
 }
 
 .input-grupo input[type="color"] {
@@ -198,7 +208,7 @@ p {
     padding: 0;
     border-radius: 4px;
     cursor: pointer;
-    border: 1px solid #ced4da;
+    border: 1px solid #bdc3c7;
 }
 
 .modal-buttons {
@@ -222,12 +232,12 @@ p {
 }
 
 #save-btn {
-    background-color: #28a745;
+    background-color: #1abc9c;
     color: #fff;
 }
 
 #save-btn:hover {
-    background-color: #218838;
+    background-color: #16a085;
 }
 
 #cancel-btn {
@@ -246,7 +256,7 @@ footer {
     text-align: center;
     margin-top: auto;
     padding: 20px;
-    background-color: #e9ecef;
-    color: #6c757d;
+    background-color: #bdc3c7;
+    color: #2c3e50;
     font-weight: 400;
 }
