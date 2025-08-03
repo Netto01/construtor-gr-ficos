@@ -29,6 +29,10 @@
         <canvas id="meuGrafico"></canvas>
     </div>
 
+    <div class="container export-container">
+        <button id="export-btn">Exportar Gráfico</button>
+    </div>
+
     <footer>
         <p>&copy; 2025 - Meu Projeto de Gráficos</p>
     </footer>
@@ -48,6 +52,33 @@
                 <label for="edit-color">Cor:</label>
                 <input type="color" id="edit-color">
             </div>
+            
+            <div id="options-group" class="options-group hidden">
+                <h3>Opções do Gráfico</h3>
+                <div class="input-grupo">
+                    <label for="chart-type">Tipo de Gráfico:</label>
+                    <select id="chart-type">
+                        <option value="bar">Barra</option>
+                        <option value="line">Linha</option>
+                    </select>
+                </div>
+                <div class="input-group-inline">
+                    <div class="input-grupo">
+                        <label for="y-min">Eixo Y (min):</label>
+                        <input type="number" id="y-min">
+                    </div>
+                    <div class="input-grupo">
+                        <label for="y-max">Eixo Y (max):</label>
+                        <input type="number" id="y-max">
+                    </div>
+                </div>
+                <div class="input-grupo">
+                    <label>
+                        <input type="checkbox" id="show-datalabels"> Mostrar Rótulos de Dados
+                    </label>
+                </div>
+            </div>
+
             <div class="modal-buttons">
                 <button id="save-btn">Salvar</button>
                 <button id="cancel-btn">Cancelar</button>
