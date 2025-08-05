@@ -14,18 +14,16 @@
     <!-- CSS local -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- JavaScript local -->
-    <script src="script.js" defer></script>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLF4Z05YJT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLF4Z05YJT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-CLF4Z05YJT');
-</script>
+      gtag('config', 'G-CLF4Z05YJT');
+    </script>
+</head>
 <body>
     <header class="container" role="banner">
         <h1>Gerador de Gráficos de Testes Neuropsicológicos</h1>
@@ -77,6 +75,28 @@
                     </select>
                 </div>
             </section>
+
+            <!-- Novo campo para seleção de idade -->
+            <div id="age-group" class="input-group hidden">
+                <label for="age-select">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    Idade:
+                </label>
+                <select id="age-select" name="age-select">
+                    <option value="" disabled selected>Selecione a idade</option>
+                    <option value="6-8">6 - 8 anos</option>
+                    <option value="9-11">9 - 11 anos</option>
+                    <option value="12-14">12 - 14 anos</option>
+                    <option value="15-17">15 - 17 anos</option>
+                    <option value="18-20">18 - 20 anos</option>
+                    <option value="21-30">21 - 30 anos</option>
+                    <option value="31-40">31 - 40 anos</option>
+                    <option value="41-50">41 - 50 anos</option>
+                    <option value="51-60">51 - 60 anos</option>
+                    <option value="61-70">61 - 70 anos</option>
+                    <option value="71-79">71 - 79 anos</option>
+                </select>
+            </div>
 
             <h2 id="panel-title">Editar Dados</h2>
 
@@ -174,5 +194,8 @@
             2025 - Sistema Gratuito de Geração de Gráficos Neuropsicológicos
         </p>
     </footer>
+
+    <!-- JavaScript local (agora como módulo) -->
+    <script src="src/main.js" type="module"></script>
 </body>
 </html>

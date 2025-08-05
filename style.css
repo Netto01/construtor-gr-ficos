@@ -78,7 +78,6 @@ p {
 }
 
 .editor-panel {
-    /* Diminuída a largura do painel do editor */
     flex: 0 0 280px;
     padding: 1.25rem;
     border-radius: 0.75rem;
@@ -87,6 +86,8 @@ p {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    overflow-y: auto;
+    max-height: 80vh;
 }
 
 .chart-panel {
@@ -100,7 +101,6 @@ p {
     border: 1px solid var(--border);
     padding: 0.9375rem;
     position: relative;
-    /* Adiciona uma altura mínima e máxima para controlar o tamanho vertical */
     min-height: 500px;
     max-height: 80vh; 
     padding-bottom: 2rem;
@@ -111,7 +111,7 @@ p {
     .chart-panel {
         padding-bottom: 3rem;
         min-height: 450px;
-        max-height: none; /* Em telas menores, a altura máxima pode ser flexível */
+        max-height: none; 
     }
 }
 
@@ -231,10 +231,11 @@ p {
 #save-btn, #export-btn {
     width: 100%;
     border: none;
-    padding: 0.75rem 1.25rem;
+    padding: 0.6rem 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
     font-weight: 500;
+    font-size: 0.9rem;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
@@ -281,7 +282,7 @@ p {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem; /* Fonte um pouco menor */
+    font-size: 0.9rem; 
 }
 
 .input-group input[type="text"],
@@ -289,18 +290,17 @@ p {
 .input-group input[type="color"],
 .input-group select {
     width: 100%;
-    padding: 0.5rem; /* Padding reduzido */
+    padding: 0.5rem; 
     border: 1px solid var(--border);
     border-radius: 0.375rem;
     background: white;
-    font-size: 0.9rem; /* Fonte um pouco menor */
+    font-size: 0.9rem;
     transition: all 0.2s ease;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
 
-/* Estilo para o dropdown */
 .input-group select {
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2364748b'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E") no-repeat right 0.75rem center / 1.5em;
     padding-right: 2.5rem;
@@ -428,32 +428,63 @@ footer {
     display: none;
 }
 
-/* Ajuste para o spinner de carregamento */
-#loading-spinner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.8);
+.data-edit-area {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-#loading-spinner i {
-    font-size: 3rem;
+.data-group {
+    border: 1px solid var(--border-light);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--background);
+}
+
+.add-data-btn {
+    width: 100%;
+    border: 1px dashed var(--primary);
+    background: var(--primary-light);
     color: var(--primary);
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
 }
 
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+.add-data-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-1px);
 }
+
+.input-group-inline {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+}
+
+.input-group-inline .input-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+#add-data-group {
+    border-top: 1px solid var(--border-light);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.hidden { display: none !important; }
+
+.text-sm { font-size: 0.875rem; }
+.text-md { font-size: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.font-bold { font-weight: 700; }
