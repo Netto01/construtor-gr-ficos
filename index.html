@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gerador de Gráficos Neuropsicológicos - PsicoChart</title>
+    <title>PsicoChart - Gerador de Gráficos Neuropsicológicos</title>
+
+     <!-- Ícone do navegador (favicon) -->
+   <link rel="icon" type="image/png" href="src/img/logo.png" sizes="32x32" />
 
     <!-- Bibliotecas externas -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -20,23 +23,19 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-CLF4Z05YJT');
     </script>
     <style>
-        /* Estilos para o logo */
         .logo-container {
             display: flex;
             justify-content: center;
             width: 100%;
             padding: 20px 0;
         }
-
         .logo {
-            max-width: 200px; /* Ajuste o tamanho conforme necessário */
+            max-width: 200px;
             height: auto;
         }
-        /* Adicionado para centralizar o título e o texto no cabeçalho */
         header.container {
             text-align: center;
         }
@@ -56,11 +55,9 @@
                 <i class="fas fa-heart pix-icon" aria-hidden="true"></i>
                 <h3 id="pix-title" class="pix-title">Apoie este projeto gratuito</h3>
             </div>
-
             <p class="pix-description">
                 Se este sistema é útil para você, considere fazer uma doação via PIX para ajudar a mantê-lo disponível.
             </p>
-
             <div class="pix-key-container">
                 <div class="pix-key" id="pix-key" tabindex="0" aria-label="Chave PIX para doação">
                     f528cfe5-ffb5-4623-b364-20cb7f946e96
@@ -70,7 +67,6 @@
                     Copiar Chave
                 </button>
             </div>
-
             <p id="pix-instructions" class="pix-instructions">
                 Abra seu app bancário &gt; PIX &gt; Copiar e Colar &gt; Cole a chave acima
             </p>
@@ -89,15 +85,16 @@
                         Teste:
                     </label>
                     <select id="test-select" name="test-select">
-                        <!-- Opção vazia adicionada para não selecionar nada por padrão -->
                         <option value="" disabled selected>Selecione um teste</option>
                         <option value="wisc">WISC-IV</option>
+                         <option value="wasi">WASI</option>
                         <option value="ravlt">RAVLT</option>
+                        <option value="fdt">FDT</option>
                     </select>
                 </div>
             </section>
 
-            <!-- Novo campo para seleção de idade -->
+            <!-- Campo para seleção de idade (aparece só para RAVLT) -->
             <div id="age-group" class="input-group hidden">
                 <label for="age-select">
                     <i class="fas fa-user" aria-hidden="true"></i>
@@ -151,7 +148,6 @@
                     <i class="fas fa-sliders-h" aria-hidden="true"></i>
                     Opções do Gráfico
                 </h3>
-
                 <div class="input-group">
                     <label for="chart-type">
                         <i class="fas fa-chart-pie" aria-hidden="true"></i>
@@ -162,7 +158,6 @@
                         <option value="line">Linha</option>
                     </select>
                 </div>
-
                 <div class="input-group-inline">
                     <div class="input-group">
                         <label for="y-min">
@@ -179,7 +174,6 @@
                         <input type="number" id="y-max" name="y-max" />
                     </div>
                 </div>
-
                 <div class="input-group">
                     <label for="show-datalabels" class="checkbox-label">
                         <input type="checkbox" id="show-datalabels" name="show-datalabels" checked />
@@ -209,6 +203,15 @@
         </section>
     </main>
 
+    <section class="social-section" aria-label="Siga no Instagram" style="text-align:center; margin: 2rem 0;">
+    <a href="https://www.instagram.com/psicochart/" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <i class="fab fa-instagram" style="font-size:2rem; color:#E1306C; vertical-align:middle;"></i>
+        <span style="font-size:1.1rem; margin-left:0.5rem;">
+            Siga <strong>@PsicoChart</strong> no Instagram para novidades e dicas!
+        </span>
+    </a>
+</section>
+
     <footer role="contentinfo">
         <p>
             <i class="far fa-copyright" aria-hidden="true"></i>
@@ -216,7 +219,7 @@
         </p>
     </footer>
 
-    <!-- JavaScript local (agora como módulo) -->
+    <!-- JavaScript local (módulo) -->
     <script src="src/main.js" type="module"></script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-// Função para desenhar uma imagem com bordas arredondadas no canvas
 export function desenharImagemArredondada(ctx, img, x, y, width, height, radius) {
     ctx.beginPath();
     ctx.moveTo(x + radius, y);
@@ -47,9 +46,6 @@ export function calcularConfigLegenda() {
     const width = window.innerWidth;
     const isMobile = width <= 600;
     const isTablet = width > 600 && width <= 1024;
-    
-    // ... (restante da sua função calcularConfigLegenda)
-    // Para simplificar, vou deixar um comentário. Você pode mover a lógica completa para cá.
     
     if (isMobile) {
         return {
@@ -102,6 +98,7 @@ export function calcularConfigLegenda() {
     }
 }
 
+// Função para mostrar mensagem de feedback
 export function mostrarMensagem(mensagem) {
     const mensagemExistente = document.querySelector('.copy-feedback');
     if (mensagemExistente) {

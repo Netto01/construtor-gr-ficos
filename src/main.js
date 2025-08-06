@@ -1,5 +1,3 @@
-// src/main.js
-
 import { dadosPredefinidos, imagemPato } from './chartData.js';
 import { mostrarMensagemInicial, calcularConfigLegenda, mostrarMensagem } from './chartUtils.js';
 import { preencherPainel, salvarAlteracoes } from './chartPanel.js';
@@ -46,6 +44,44 @@ document.addEventListener('DOMContentLoaded', () => {
     let contextoEdicao = 'titulo';
     let testeSelecionado = null;
 
+    // Listas de idades para cada teste
+    const fdtIdades = [
+        { value: '6-8', label: '6 - 8 anos' },
+        { value: '9-10', label: '9 - 10 anos' },
+        { value: '11-12', label: '11 - 12 anos' },
+        { value: '13-15', label: '13 - 15 anos' },
+        { value: '16-18', label: '16 - 18 anos' },
+        { value: '19-34', label: '19 - 34 anos' },
+        { value: '35-59', label: '35 - 59 anos' },
+        { value: '60-75', label: '60 - 75 anos' },
+        { value: '76-200', label: '76 anos ou mais' }
+    ];
+
+    const ravltIdades = [
+        { value: '6-8', label: '6 - 8 anos' },
+        { value: '9-11', label: '9 - 11 anos' },
+        { value: '12-14', label: '12 - 14 anos' },
+        { value: '15-17', label: '15 - 17 anos' },
+        { value: '18-20', label: '18 - 20 anos' },
+        { value: '21-30', label: '21 - 30 anos' },
+        { value: '31-40', label: '31 - 40 anos' },
+        { value: '41-50', label: '41 - 50 anos' },
+        { value: '51-60', label: '51 - 60 anos' },
+        { value: '61-70', label: '61 - 70 anos' },
+        { value: '71-79', label: '71 - 79 anos' }
+    ];
+
+    function atualizarIdades(tipo) {
+        ageSelect.innerHTML = '<option value="" disabled selected>Selecione a idade</option>';
+        const lista = tipo === 'fdt' ? fdtIdades : ravltIdades;
+        lista.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt.value;
+            option.textContent = opt.label;
+            ageSelect.appendChild(option);
+        });
+    }
+
     // --- 3. Funções do Gráfico e Painel ---
     function criarGrafico(dados) {
         if (meuGrafico) {
@@ -66,8 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
             layoutPadding = { top: 20, bottom: 100, left: 20, right: 20 };
         }
 
-        // Configuração de anotação para WISC-IV
-        const annotationConfig = (dados.titulo === 'Resultados do WISC-IV') ? {
+        // Configuração de anotação para WISC-IV e WASI-II
+        const annotationConfig = (dados.titulo === 'Resultados do WISC-IV' || dados.titulo === 'Resultados do WASI-II') ? {
             annotations: {
                 box1: {
                     type: 'box',
@@ -95,31 +131,31 @@ document.addEventListener('DOMContentLoaded', () => {
             data: dados.valores,
             backgroundColor: dados.cores,
             borderColor: dados.tipo === 'line' ? dados.cores[0] : 'transparent',
-            borderWidth: dados.tipo === 'line' ? 3 : 1, // Aumenta a largura da linha do paciente para linha, 1 para barra
+            borderWidth: dados.tipo === 'line' ? 3 : 1,
             tension: 0.3,
-            pointRadius: dados.tipo === 'line' ? 6 : 0, // Pontos apenas para gráfico de linha
+            pointRadius: dados.tipo === 'line' ? 6 : 0,
             pointBackgroundColor: dados.cores,
             pointStyle: dados.tipo === 'line' ? 'circle' : 'rect',
-            order: 1 // Garante que a linha/barra do paciente esteja na frente
+            order: 1
         }];
         
-        // Adiciona datasets para as linhas/barras de referência do RAVLT, se aplicável
-        if (testeSelecionado === 'ravlt' && ageSelect.value) {
+        // Adiciona datasets para as linhas/barras de referência do RAVLT ou FDT, se aplicável
+        if ((testeSelecionado === 'ravlt' || testeSelecionado === 'fdt') && ageSelect.value) {
             const idade = ageSelect.value;
-            const normas = dadosPredefinidos.ravlt.normas[idade];
+            const normas = dadosPredefinidos[testeSelecionado].normas[idade];
 
             datasets.push({
                 label: 'Mínimo',
                 data: normas.min,
-                borderColor: dados.tipo === 'line' ? 'rgba(231, 76, 60, 0.8)' : 'transparent', // Borda para linha, transparente para barra
-                backgroundColor: dados.tipo === 'line' ? 'transparent' : 'rgba(231, 76, 60, 0.6)', // Transparente para linha, sólido para barra
+                borderColor: dados.tipo === 'line' ? 'rgba(231, 76, 60, 0.8)' : 'transparent',
+                backgroundColor: dados.tipo === 'line' ? 'transparent' : 'rgba(231, 76, 60, 0.6)',
                 borderWidth: 2,
-                borderDash: dados.tipo === 'line' ? [5, 5] : [], // Tracejado para linha, sólido para barra
+                borderDash: dados.tipo === 'line' ? [5, 5] : [],
                 tension: 0.3,
-                pointRadius: 0, // Sem pontos para barras ou linhas de referência
+                pointRadius: 0,
                 fill: false,
-                type: dados.tipo, // Usa o tipo de gráfico principal (linha ou barra)
-                order: 2 // Ordem para as linhas/barras de referência
+                type: dados.tipo,
+                order: 2
             });
 
             datasets.push({
@@ -194,8 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         label.text = label.text.substring(0, 17) + '...';
                                     }
                                 });
-                                // Adiciona a legenda para a área de média do WISC-IV
-                                if (dados.titulo === 'Resultados do WISC-IV') {
+                                if (dados.titulo === 'Resultados do WISC-IV' || dados.titulo === 'Resultados do WASI-II') {
                                     labels.push({
                                         text: isMobile ? 'Média: 90-109' : 'Média: 90 - 109',
                                         fillStyle: 'rgba(52, 73, 94, 0.15)',
@@ -210,9 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         },
                         onClick: (e, legendItem) => {
-                            // Impede a edição ao clicar nas legendas de referência
                             if (legendItem.text.includes('Média') || legendItem.text === 'Mínimo' || legendItem.text === 'Máximo') {
-                                // Alterna a visibilidade do dataset clicado
                                 const index = legendItem.datasetIndex;
                                 const ci = meuGrafico;
                                 const meta = ci.getDatasetMeta(index);
@@ -248,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const elementosAtivos = meuGrafico.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
                     if (elementosAtivos.length > 0) {
                         const clickedElement = elementosAtivos[0];
-                        // Permite edição apenas para o primeiro dataset (dados do paciente)
                         if (clickedElement.datasetIndex === 0) {
                             const index = clickedElement.index;
                             elementoEmEdicaoIndex = index;
@@ -279,7 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (e.x >= tituloArea.left && e.x <= tituloArea.right && e.y >= tituloArea.top && e.y <= tituloArea.bottom) {
                         e.native.target.style.cursor = 'pointer';
                     }
-                    // Apenas muda o cursor se for um ponto do dataset do paciente
                     if (elementosAtivos.length > 0 && elementosAtivos[0].datasetIndex === 0) {
                         e.native.target.style.cursor = 'pointer';
                     }
@@ -316,22 +347,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function carregarDados(tipo) {
-        if (tipo === testeSelecionado) return;
         testeSelecionado = tipo;
         estadoAtualDoGrafico = JSON.parse(JSON.stringify(dadosPredefinidos[tipo]));
         contextoEdicao = 'titulo';
         elementoEmEdicaoIndex = null;
         criarGrafico(estadoAtualDoGrafico);
-        preencherPainel(contextoEdicao, panelTitle, editLabelInput, editValueInput, editColorInput, labelGroup, valueGroup, colorGroup, optionsGroup, estadoAtualDoGrafico, estadoAtualDoGrafico.titulo, '', '#000000');
+        preencherPainel(contextoEdicao, panelTitle, editLabelInput, editValueInput, editColorInput, labelGroup, valueGroup, colorGroup, optionsGroup, estadoAtualDoGrafico, estadoAtualDoGrafico.titulo, '', '#000000', chartTypeSelect, yMinInput, yMaxInput, showDatalabelsCheckbox);
         
-        // Esconde ou mostra o seletor de idade
-        if (tipo === 'ravlt') {
+        if (tipo === 'ravlt' || tipo === 'fdt') {
             ageGroup.classList.remove('hidden');
+            atualizarIdades(tipo);
         } else {
             ageGroup.classList.add('hidden');
-            ageSelect.value = ""; // Reseta a seleção de idade quando muda de teste
+            ageSelect.value = "";
         }
-        
     }
 
     function exportarGrafico() {
